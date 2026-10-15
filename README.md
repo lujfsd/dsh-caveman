@@ -34,7 +34,7 @@ from [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) (MIT):
 > would win).
 
 ```sh
-dsh plugin --profile web add github:maci0/dsh-caveman#v0.16.3
+dsh plugin --profile web add github:maci0/dsh-caveman#v0.16.4
 ```
 
 Pin a release tag: a bare `github:` spec floats on `main`. To upgrade, run the
