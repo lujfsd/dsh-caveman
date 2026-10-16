@@ -34,12 +34,11 @@ from [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) (MIT):
 > would win).
 
 ```sh
-dsh plugin --profile web add github:maci0/dsh-caveman#v0.16.4
+dsh plugin --profile web add --save-exact @maci0/dsh-caveman@0.17.0
 ```
 
-Pin a release tag: a bare `github:` spec floats on `main`. To upgrade, run the
-same command with the newer tag, then restart `dsh web` (bundle layers compose
-at boot).
+Pin an exact npm version. To upgrade, run the same command with the newer
+version, then restart `dsh web` (bundle layers compose at boot).
 
 ## Use it
 

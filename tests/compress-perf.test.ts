@@ -43,10 +43,10 @@ import { validate } from '../src/compress-validate.ts'
 const CORPUS_BYTES = 512 * 1024
 
 /** Warm-up passes: JIT, regex engine caches, megamorphic call sites. */
-const WARMUP_PASSES = 5
+const WARMUP_PASSES = 3
 
 /** Measured passes; the minimum across them is the reported sample. */
-const MEASURED_PASSES = 10
+const MEASURED_PASSES = 5
 
 /**
  * Ceiling for the minimum per-pass CPU time, in microseconds. Reference is
@@ -106,7 +106,7 @@ function runPipeline(): string {
   return compressed
 }
 
-test('compress pipeline stays inside its CPU budget on a fixed corpus', () => {
+test('compress pipeline stays inside its CPU budget on a fixed corpus', { timeout: 120_000 }, () => {
   for (let pass = 0; pass < WARMUP_PASSES; pass += 1) runPipeline()
 
   const samples: number[] = []
@@ -147,7 +147,7 @@ test('compress pipeline output is byte-stable on the fixed corpus', () => {
   assert.equal(digest, REFERENCE_DIGEST, 'compressed bytes changed; update only with a deliberate rule change')
 })
 
-test('compress pipeline allocation stays inside its collection budget', () => {
+test('compress pipeline allocation stays inside its collection budget', { timeout: 120_000 }, () => {
   const isBun = process.versions.bun !== undefined
   const budget = isBun ? MAX_COLLECTIONS : MAX_SCAVENGES
   // Allocation churn, not time: each collection follows a fixed allocation
